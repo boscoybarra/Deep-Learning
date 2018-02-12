@@ -5,18 +5,19 @@ import numpy as np
 def prepare_inputs(inputs):
     # TODO: create a 2-dimensional ndarray from the given 1-dimensional list;
     #       assign it to input_array
-    input_array = np.array([[1,2],[3,4]])
+    input_array = np.array([inputs])
 
     # TODO: find the minimum value in input_array and subtract that
     #       value from all the elements of input_array. Store the
     #       result in inputs_minus_min
 
-    inputs_minus_min = np.amin(input_array)
+    inputs_minus_min = input_array - np.min(input_array)
 
     # TODO: find the maximum value in inputs_minus_min and divide
     #       all of the values in inputs_minus_min by the maximum value.
     #       Store the results in inputs_div_max.
-    inputs_div_max = None
+    a = np.max(inputs_minus_min)
+    inputs_div_max = inputs_minus_min / a
 
     # return the three arrays we've created
     return input_array, inputs_minus_min, inputs_div_max
@@ -28,18 +29,22 @@ def multiply_inputs(m1, m2):
     #
     #       Return False if the shapes cannot be used for matrix
     #       multiplication. You may not use a transpose
-    pass
-
+    print(m1.shape)
+    print(m2.shape)
+    if m1.shape[0] != m2.shape[1] and m1.shape[1] != m2.shape[0]:
+        return False
 
     # TODO: If you have not returned False, then calculate the matrix product
     #       of m1 and m2 and return it. Do not use a transpose,
     #       but you swap their order if necessary
-    pass
-
+    if m1.shape[1] == m2.shape[0]:
+        return np.matmul(m1, m2)
+    else:
+        return np.matmul(m2, m1)
 
 def find_mean(values):
     # TODO: Return the average of the values in the given Python list
-    pass
+    return np.mean(values)
 
 
 input_array, inputs_minus_min, inputs_div_max = prepare_inputs([-1,2,7])

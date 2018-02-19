@@ -57,15 +57,15 @@ for e in range(epochs):
         hidden_error = np.dot(weights_hidden_output, output_error_term)
 
         # TODO: Calculate the error term for the hidden layer
-        hidden_error_term = None
+        hidden_error_term = np.dot(hidden_error,prime(hidden_output))
 
         # TODO: Update the change in weights
-        del_w_hidden_output += 0
-        del_w_input_hidden += 0
+        del_w_hidden_output += np.dot(output_error_term, output)
+        del_w_input_hidden += np.dot(x[:,None], hidden_error_term[:,None].T)
 
     # TODO: Update weights
-    weights_input_hidden += 0
-    weights_hidden_output += 0
+    weights_input_hidden += learnrate * del_w_input_hidden / n_records
+    weights_hidden_output += learnrate * del_w_hidden_output / n_records
 
     # Printing out the mean square error on the training set
     if e % (epochs / 10) == 0:

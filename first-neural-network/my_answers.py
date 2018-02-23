@@ -21,7 +21,7 @@ class NeuralNetwork(object):
         # Note: in Python, you can define a function with a lambda expression,
         # as shown below.
         self.activation_function = lambda x : (1 / (1 + np.exp(-x)))  # Replace 0 with your sigmoid calculation.
-        self.prime = lambda x : x * (1 - x)
+        self.sigmoid_prime = lambda x : x * (1 - x)
 
         ### If the lambda code above is not something you're familiar with,
         # You can uncomment out the following three lines and put your
@@ -94,12 +94,14 @@ class NeuralNetwork(object):
         error = y - final_outputs # Output layer error is the difference between desired target and actual output.
 
         # TODO: Backpropagated error terms - Replace these values with your calculations.
+        # This is with respect the derivative of the error, but since there is no activation to which take the derivative of it is set to zeroself.
+        # Therefore we just leave the (y - y_hat) which is the error against our objective.
         output_error_term = error
 
         # TODO: Calculate the hidden layer's contribution to the error
         hidden_error = np.dot(self.weights_hidden_to_output, output_error_term)
 
-        hidden_error_term = hidden_error * (self.prime(hidden_outputs))
+        hidden_error_term = hidden_error * (self.sigmoid_prime(hidden_outputs))
 
         # Weight step (input to hidden)
         delta_weights_i_h += hidden_error_term * X[:, None]

@@ -26,6 +26,7 @@ xor.add(Activation('sigmoid'))
 
 # Specify loss as "binary_crossentropy", optimizer as "adam",
 # and add the accuracy metric
+
 xor.compile(loss= "binary_crossentropy", optimizer="adam", metrics = ["accuracy"])
 
 # Uncomment this line to print the model architecture

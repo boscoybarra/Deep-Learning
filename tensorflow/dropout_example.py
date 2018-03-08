@@ -60,6 +60,7 @@ biases = [
     tf.Variable(tf.zeros(3)),
     tf.Variable(tf.zeros(2))]
 
+
 # Input
 features = tf.Variable([[0.0, 2.0, 3.0, 4.0], [0.1, 0.2, 0.3, 0.4], [11.0, 12.0, 13.0, 14.0]])
 
